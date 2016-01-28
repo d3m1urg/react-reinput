@@ -1,0 +1,31 @@
+{
+  "name": "react-reinput",
+  "version": "0.0.1",
+  "description": "React input component backed by extensive regex support.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d3m1urg/react-reinput.git"
+  },
+  "keywords": [
+    "react",
+    "input",
+    "regex"
+  ],
+  "author": "Ilya Sharonov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/d3m1urg/react-reinput/issues"
+  },
+  "homepage": "https://github.com/d3m1urg/react-reinput#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6"
+  }
+}

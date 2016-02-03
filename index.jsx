@@ -13,8 +13,8 @@ export default class Reinput extends Component {
       placeholderOn: groups.length === 0,
     };
     this.handleValueChange = this.handleValueChange.bind(this);
-    this.handleFocusGained = this.handleFocusGained.bind(this);
-    this.handleFocusLost = this.handleFocusLost.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   initGroups({ initValue: value, pattern, trimInitValue: trim }) {
@@ -114,7 +114,7 @@ export default class Reinput extends Component {
     }
   }
 
-  handleFocusGained() {
+  handleFocus() {
     if (this.state.placeholderOn) {
       this.setState({
         placeholderOn: false,
@@ -123,8 +123,8 @@ export default class Reinput extends Component {
     }
   }
 
-  handleFocusLost() {
-    if (this.state.value === '' && this.props.mask) {
+  handleBlur() {
+    if (this.state.value === '' && this.props.initValue === '' && this.props.mask) {
       this.setState({
         placeholderOn: true,
         value: this.initPlaceholder(this.props),
@@ -133,17 +133,17 @@ export default class Reinput extends Component {
   }
 
   render() {
-    const inputClasses = classnames({
+    const compositClasses = classnames({
       'react-reinput': !this.state.placeholderOn,
       'react-reinput__placeholder': this.state.placeholderOn,
-    });
+    }, this.props.className);
     return (
       <input type="text"
-        className={inputClasses}
+        className={compositClasses}
         ref = {ref => this.input = ref}
         onChange = {this.handleValueChange}
-        onFocus = {this.handleFocusGained}
-        onBlur = {this.handleFocusLost}
+        onFocus = {this.handleFocus}
+        onBlur = {this.handleBlur}
         value = {this.state.value}
       />
     );
@@ -157,6 +157,7 @@ Reinput.propTypes = {
   mask: PropTypes.string, // mask can be e.g. 1111 sdfh 2222
   placeholder: PropTypes.string,
   trimInitValue: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 Reinput.defaultProps = {

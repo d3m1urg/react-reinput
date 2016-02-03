@@ -1,21 +1,26 @@
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 
 export default class Reinput extends Component {
   constructor(props) {
     super(props);
     const groups = this.initGroups(props);
-    const value = this.initValue(groups, props.separator);
+    const value = groups.length > 0 ? this.initValue(groups, props.separator)
+                                    : this.initPlaceholder(props);
     this.state = {
       value,
       groups,
+      placeholderOn: groups.length === 0,
     };
     this.handleValueChange = this.handleValueChange.bind(this);
+    this.handleFocusGained = this.handleFocusGained.bind(this);
+    this.handleFocusLost = this.handleFocusLost.bind(this);
   }
 
   initGroups({ initValue: value, pattern, trimInitValue: trim }) {
     const val = trim ? value.trim() : value;
     const matched = val.match(pattern);
-    return matched ? matched.slice(1).filter((item) => item) : [];
+    return matched ? matched.slice(1).filter(item => item) : [];
   }
 
   initValue(groups, separator) {
@@ -28,32 +33,19 @@ export default class Reinput extends Component {
     return val;
   }
 
-  /* correctCursorPosition(curPos) {
-    let correctedPos = curPos;
-    if (this.state.groups.length > 0) {
-      let cumulative = 0;
-      for(let i = 0; i < this.state.groups.length; i++) {
-        cumulative += this.state.groups[i].length;
-        if(correctedPos < cumulative) {
-          correctedPos += i;
-          break;
-        }
-      }
+  initPlaceholder({ mask, pattern, placeholder, separator }) {
+    let placeholderVal = '';
+    const maskCh = mask.replace(new RegExp(' ', 'g'), '');
+    let matched = maskCh.match(pattern);
+    if (matched) {
+      matched = matched ? matched.slice(1).filter(item => item) : [];
+      placeholderVal = matched.reduce((prev, next, ind, arr) => {
+        const str = [...next].fill(placeholder).join('');
+        return prev + (ind < (arr.length - 1) ? (str + separator) : str);
+      }, '');
     }
-    return correctedPos;
+    return placeholderVal;
   }
-
-  getModifiedGroupIndex(cursor) {
-    let cumulative = 0;
-    const modCursor = this.correctCursorPosition(cursor);
-    for (let i = 0; i < this.state.groups.length; i++) {
-      cumulative += this.state.groups[i].length;
-      if (modCursor < cumulative) {
-        return i;
-      }
-    }
-    return 0;
-  } */
 
   wasSeparatorRemoved(val) {
     let sepRemoved = false;
@@ -84,7 +76,7 @@ export default class Reinput extends Component {
     }
     let matched = value.match(this.props.pattern);
     if (matched) {
-      matched = matched.slice(1).filter((item) => item);
+      matched = matched.slice(1).filter(item => item);
       this.setState({
         value: matched.length > 1 ? matched.join(this.props.separator) : value,
         groups: matched,
@@ -122,11 +114,36 @@ export default class Reinput extends Component {
     }
   }
 
+  handleFocusGained() {
+    if (this.state.placeholderOn) {
+      this.setState({
+        placeholderOn: false,
+        value: '',
+      });
+    }
+  }
+
+  handleFocusLost() {
+    if (this.state.value === '' && this.props.mask) {
+      this.setState({
+        placeholderOn: true,
+        value: this.initPlaceholder(this.props),
+      });
+    }
+  }
+
   render() {
+    const inputClasses = classnames({
+      'react-reinput': !this.state.placeholderOn,
+      'react-reinput__placeholder': this.state.placeholderOn,
+    });
     return (
       <input type="text"
-        ref = {(ref) => {this.input = ref;}}
+        className={inputClasses}
+        ref = {ref => this.input = ref}
         onChange = {this.handleValueChange}
+        onFocus = {this.handleFocusGained}
+        onBlur = {this.handleFocusLost}
         value = {this.state.value}
       />
     );

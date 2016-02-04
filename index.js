@@ -38,7 +38,7 @@ export default class Reinput extends Component {
     const maskCh = mask.replace(new RegExp(' ', 'g'), '');
     let matched = maskCh.match(pattern);
     if (matched) {
-      matched = matched ? matched.slice(1).filter(item => item) : [];
+      matched = matched.slice(1).filter(item => item);
       placeholderVal = matched.reduce((prev, next, ind, arr) => {
         const str = [...next].fill(placeholder).join('');
         return prev + (ind < (arr.length - 1) ? (str + separator) : str);

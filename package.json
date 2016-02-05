@@ -51,7 +51,7 @@
     "classnames": "^2.2.3"
   },
   "scripts": {
-    "test": "mocha --require tests/utils/dom.js --reporter nyan --compilers js:babel-register --recursive 'tests/**/*.test.js'",
+    "test": "mocha --require tests/utils/dom.js --reporter nyan --compilers js:babel-core/register --recursive 'tests/**/*.test.js'",
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover _mocha -- --reporter nyan --require tests/utils/dom.js --recursive 'tests/**/*.test.js'",
     "build:js": "browserify -t [babelify] build/index.js -o build/bundle.js",
     "build": "npm run build:js",

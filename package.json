@@ -40,7 +40,10 @@
     "onchange": "^2.0.0",
     "react-addons-test-utils": "^0.14.7",
     "should": "^8.2.1",
-    "watch": "^0.17.1"
+    "watch": "^0.17.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "classnames": "^2.2.3"
   },
   "dependencies": {
     "react": "^0.14.7",

@@ -1,3 +1,5 @@
+'use strict';
+
 var jsdom = require('jsdom')
 
 // setup the simplest document possible

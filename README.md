@@ -25,7 +25,7 @@ and use it in your React components:
 ####Available props
 
 | Prop name | Prop type | Default value | Description |
-|  :---:    | :---:     | :---:         | :---:       |
+|  :---:    | :---:     | :---:         | :---       |
 | `pattern` | React.PropTypes.any | `^(.*)$` | A string or a RexExp containing regular expression with **_capturing groups_**. User input is split into groups and groups are displayed with a provided `separator` between them. If `pattern` doesn't contain capturing groups then input will not work properly. |
 | `separator` | React.PropTypes.string | `' '` | A character intended to separate groups from one another. It is expected to be just *one* character wide. |
 | `initValue` | React.PropTypes.string | `''` | Sets the initial value of the input. Note, that `initValue` is processed with a regular expression provided in `pattern` and must match it. Otherwise it is not set and not displayed to the user.|

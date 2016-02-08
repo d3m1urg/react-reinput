@@ -2,7 +2,7 @@
   "name": "react-reinput",
   "version": "0.0.1",
   "description": "React input component backed by extensive regex support.",
-  "main": "index.jsx",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/d3m1urg/react-reinput.git"

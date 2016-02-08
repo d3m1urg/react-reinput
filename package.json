@@ -54,7 +54,7 @@
   },
   "scripts": {
     "test": "mocha --require tests/utils/dom.js --reporter spec --compilers js:babel-register --recursive 'tests/**/*.test.js'",
-    "coveralls": "babel-node ./node_modules/istanbul/lib/cli cover _mocha --report lcovonly -- --reporter spec --require tests/utils/dom.js --recursive 'tests/**/*.test.js' && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "coveralls": "babel-node ./node_modules/istanbul/lib/cli cover _mocha --report lcovonly -- --reporter spec --require tests/utils/dom.js --recursive 'tests/**/*.test.js' && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover _mocha -- --reporter nyan --require tests/utils/dom.js --recursive 'tests/**/*.test.js'",
     "build:js": "browserify -t [babelify] build/index.js -o build/bundle.js",
     "build": "npm run build:js",

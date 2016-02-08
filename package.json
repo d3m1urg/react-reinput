@@ -29,6 +29,8 @@
     "babel-register": "^6.4.3",
     "babelify": "^7.2.0",
     "chai": "^3.5.0",
+    "classnames": "^2.2.3",
+    "coveralls": "^2.11.6",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^4.0.0",
     "eslint-plugin-react": "^3.16.1",
@@ -37,13 +39,13 @@
     "jest-cli": "^0.8.2",
     "jsdom": "^8.0.2",
     "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.0.0",
     "onchange": "^2.0.0",
-    "react-addons-test-utils": "^0.14.7",
-    "should": "^8.2.1",
-    "watch": "^0.17.1",
     "react": "^0.14.7",
+    "react-addons-test-utils": "^0.14.7",
     "react-dom": "^0.14.7",
-    "classnames": "^2.2.3"
+    "should": "^8.2.1",
+    "watch": "^0.17.1"
   },
   "dependencies": {
     "react": "^0.14.7",
@@ -52,6 +54,7 @@
   },
   "scripts": {
     "test": "mocha --require tests/utils/dom.js --reporter spec --compilers js:babel-register --recursive 'tests/**/*.test.js'",
+    "coveralls": "babel-node ./node_modules/istanbul/lib/cli cover _mocha --report lcovonly -- --reporter spec --require tests/utils/dom.js --recursive 'tests/**/*.test.js' && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover _mocha -- --reporter nyan --require tests/utils/dom.js --recursive 'tests/**/*.test.js'",
     "build:js": "browserify -t [babelify] build/index.js -o build/bundle.js",
     "build": "npm run build:js",

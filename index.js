@@ -27,6 +27,7 @@ export default class Reinput extends Component {
     let val = '';
     if (groups.length === 1) {
       val = groups[0];
+    /* istanbul ignore else  */
     } else if (groups.length > 1) {
       val = groups.join(separator);
     }
@@ -37,6 +38,7 @@ export default class Reinput extends Component {
     let placeholderVal = '';
     const maskCh = mask.replace(new RegExp(' ', 'g'), '');
     let matched = maskCh.match(pattern);
+    /* istanbul ignore else  */
     if (matched) {
       matched = matched.slice(1).filter(item => item);
       placeholderVal = matched.reduce((prev, next, ind, arr) => {
@@ -49,6 +51,7 @@ export default class Reinput extends Component {
 
   wasSeparatorRemoved(val) {
     let sepRemoved = false;
+    /* istanbul ignore else  */
     if (this.state.groups.length > 0) {
       const chValue = val.replace(new RegExp(`\\${this.props.separator}`, 'g'), '');
       if (chValue.length === this.state.groups.join('').length) {
@@ -60,6 +63,7 @@ export default class Reinput extends Component {
 
   wasSymbolRemoved(value) {
     let symbolRemoved = false;
+    /* istanbul ignore else  */
     if (this.state.groups.length > 0) {
       const chValue = value.replace(new RegExp(`\\${this.props.separator}`, 'g'), '');
       if (chValue.length < this.state.groups.join('').length) {
@@ -81,6 +85,7 @@ export default class Reinput extends Component {
         value: matched.length > 1 ? matched.join(this.props.separator) : value,
         groups: matched,
       }, () => {
+        /* istanbul ignore else  */
         if (cursor !== undefined) {
           this.input.selectionStart = cursor;
           this.input.selectionEnd = cursor;
@@ -115,6 +120,7 @@ export default class Reinput extends Component {
   }
 
   handleFocus() {
+    /* istanbul ignore else  */
     if (this.state.placeholderOn) {
       this.setState({
         placeholderOn: false,
@@ -124,6 +130,7 @@ export default class Reinput extends Component {
   }
 
   handleBlur() {
+    /* istanbul ignore else  */
     if (this.state.value === '' && this.props.initValue === '' && this.props.mask) {
       this.setState({
         placeholderOn: true,
@@ -167,4 +174,5 @@ Reinput.defaultProps = {
   mask: '', // test mask with a pattern if the former is specified
   placeholder: '_',
   trimInitValue: false,
+  className: '',
 };

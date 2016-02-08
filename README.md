@@ -24,7 +24,7 @@ and use it in your React components:
 
 ####Available props
 
-| Prop name | Prop type | Default value | Description |
+| Prop name | Prop type | Default | Description |
 |  :---:    | :---:     | :---:         | :---       |
 | `pattern` | React.PropTypes.any | `^(.*)$` | A string or a RexExp containing regular expression with **_capturing groups_**. User input is split into groups and groups are displayed with a provided `separator` between them. If `pattern` doesn't contain capturing groups then input will not work properly. |
 | `separator` | React.PropTypes.string | `' '` | A character intended to separate groups from one another. It is expected to be just *one* character wide. |

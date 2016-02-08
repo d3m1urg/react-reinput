@@ -1,0 +1,10 @@
+.npmignore
+.gitignore
+build/**
+coverage/**
+example/**
+node_modules/**
+tests/**
+.coveralls.yml
+.eslintrc
+.travis.yml

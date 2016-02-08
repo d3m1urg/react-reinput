@@ -36,7 +36,7 @@ export default class Reinput extends Component {
 
   initPlaceholder({ mask, pattern, placeholder, separator }) {
     let placeholderVal = '';
-    const maskCh = mask.replace(new RegExp(' ', 'g'), '');
+    const maskCh = mask.replace(new RegExp(`\\${separator}`, 'g'), '');
     let matched = maskCh.match(pattern);
     /* istanbul ignore else  */
     if (matched) {

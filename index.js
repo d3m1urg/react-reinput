@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
 export default class Reinput extends Component {
+
   constructor(props) {
     super(props);
     const groups = this.initGroups(props);
@@ -85,6 +86,7 @@ export default class Reinput extends Component {
         value: matched.length > 1 ? matched.join(this.props.separator) : value,
         groups: matched,
       }, () => {
+        this.props.onChange(matched.join(''));
         /* istanbul ignore else  */
         if (cursor !== undefined) {
           this.input.selectionStart = cursor;
@@ -165,6 +167,7 @@ Reinput.propTypes = {
   placeholder: PropTypes.string,
   trimInitValue: PropTypes.bool,
   className: PropTypes.string,
+  onChange: PropTypes.string,
 };
 
 Reinput.defaultProps = {
@@ -175,4 +178,5 @@ Reinput.defaultProps = {
   placeholder: '_',
   trimInitValue: false,
   className: '',
+  onChange: () => {},
 };

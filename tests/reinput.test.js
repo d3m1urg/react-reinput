@@ -109,6 +109,7 @@ describe('Reinput', () => {
     });
     expect(reinput2.state.value).to.equal('1234 5');
   });
+  let op = '';
   const reinput3 = TestUtils.renderIntoDocument(
     <Reinput
       pattern={/^(\d{1,4})?(\d{1,4})?(\d{1,4})?(\d{1,4})?$/}
@@ -116,6 +117,7 @@ describe('Reinput', () => {
       mask="1111 1111 1111 1111"
       placeholder="_"
       initValue="1234567"
+      onChange={(value) => { op = value; }}
     />
   );
   it('Renders another Reinput element with init value', () => {
@@ -130,5 +132,8 @@ describe('Reinput', () => {
       },
     });
     expect(reinput3.state.value).to.equal('1234 5678');
+  });
+  it('Checks onChange correctness', () => {
+    expect(op).to.equal('12345678');
   });
 });
